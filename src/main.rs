@@ -1,11 +1,14 @@
 mod cosine;
 mod cross_product;
+mod determinant;
 mod dot;
+mod inverse;
 mod lerp;
 mod linear_combination;
 mod matrix;
 mod matrix_multiplication;
 mod norm;
+mod rank;
 mod row_echelon_form;
 mod trace;
 mod transpose;
@@ -323,7 +326,82 @@ fn main() {
         vec![4., 2.5, 20., 4., -4.],
         vec![8., 5., 1., 4., 17.],
     ]);
+    println!(" U : {}", u);
     println!("{}", u.row_echelon());
+    let mut u = Matrix::from(vec![vec![1., 0., 0.], vec![0., 1., 0.], vec![0., 0., 1.]]);
+    println!(" U : {}", u);
+    println!("{}", u.row_echelon());
+    let mut u = Matrix::from(vec![vec![1., 2.], vec![3., 4.]]);
+    println!(" U : {}", u);
+    println!("{}", u.row_echelon());
+    let mut u = Matrix::from(vec![vec![1., 2.], vec![2., 4.]]);
+    println!(" U : {}", u);
+    println!("{}", u.row_echelon());
+    let mut u = Matrix::from(vec![vec![4., 2.], vec![2., 1.]]);
+    println!(" U : {}", u);
+    println!("{}", u.row_echelon());
+    println!("------------------------------------------------------");
+    println!("DETERMINANT");
+    println!("------------------------------------------------------");
+    let mut u = Matrix::from(vec![vec![2., 0., 0.], vec![0., 2., 0.], vec![0., 0., 2.]]);
+    println!(" U : {}", u);
+    println!("{:?}", u.determinant());
+    let mut u = Matrix::from(vec![
+        vec![2., 4., 5., 6.],
+        vec![-1., 5., 6., 9.],
+        vec![3., 7., 1., -6.],
+        vec![4., 2., 3., 5.],
+    ]);
+    println!(" U : {}", u);
+    println!("{}", u.determinant());
+    let mut u = Matrix::from(vec![vec![8., 5., -2.], vec![4., 7., 20.], vec![7., 6., 1.]]);
+    println!(" U : {}", u);
+    println!("{}", u.determinant());
+    let mut u = Matrix::from(vec![
+        vec![8., 5., -2., 4.],
+        vec![4., 2.5, 20., 4.],
+        vec![8., 5., 1., 4.],
+        vec![28., -4., 17., 1.],
+    ]);
+    println!(" U : {}", u);
+    println!("{}", u.determinant());
+    println!("------------------------------------------------------");
+    println!("INVERSE");
+    println!("------------------------------------------------------");
+    let mut u = Matrix::from(vec![vec![8., 5., -2.], vec![4., 7., 20.], vec![7., 6., 1.]]);
+    let tet = u.inverse();
+    if let Ok(description) = &tet {
+        println!("{}", description);
+    }
+
+    if let Err(err) = &tet {
+        println!("Error: {}", err);
+    }
+    let mut u = Matrix::from(vec![vec![1., 0., 0.], vec![0., 1., 0.], vec![0., 0., 1.]]);
+    let tet = u.inverse();
+    if let Ok(description) = &tet {
+        println!("{}", description);
+    }
+
+    if let Err(err) = &tet {
+        println!("Error: {}", err);
+    }
+    let mut u = Matrix::from(vec![vec![2., 0., 0.], vec![0., 2., 0.], vec![0., 0., 2.]]);
+    let tet = u.inverse();
+    if let Ok(description) = &tet {
+        println!("{}", description);
+    }
+
+    if let Err(err) = &tet {
+        println!("Error: {}", err);
+    }
+    println!("------------------------------------------------------");
+    println!("RANK");
+    println!("------------------------------------------------------");
+    let mut u = Matrix::from(vec![vec![8., 5., -2.], vec![4., 7., 20.], vec![7., 6., 1.]]);
+    println!(" U : {}", u);
+    println!("{}", u.rank());
+
     // [1.0, 0.625, 0.0, 0.0, -12.1666667]
     // [0.0, 0.0, 1.0, 0.0, -3.6666667]
     // [0.0, 0.0, 0.0, 1.0, 29.5 ]

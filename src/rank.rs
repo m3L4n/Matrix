@@ -1,5 +1,8 @@
 use crate::Matrix;
-use std::ops::{Add, Mul, Sub};
+use std::{
+    ops::{Add, Mul, Sub},
+    vec,
+};
 
 pub fn division_vec<K>(vec: Vec<K>, scl: K) -> Vec<K>
 where
@@ -52,6 +55,31 @@ where
     }
     new_vector
 }
+
+fn get_identity_matrix<K>(n: usize, types: K, matrix_to_apprend: Matrix<K>) -> Matrix<K>
+where
+    K: Add<Output = K>
+        + Sub<Output = K>
+        + Mul<Output = K>
+        + Copy
+        + std::fmt::Debug
+        + std::fmt::Display
+        + std::ops::Div<Output = K>,
+{
+    let mut matrix_indentity = Matrix { elements: vec![] };
+    for i in 0..n {
+        let mut tmp_vec = matrix_to_apprend.elements[i].clone();
+        for k in 0..n {
+            if k != i {
+                tmp_vec.push(types - types);
+            } else {
+                tmp_vec.push(types / types);
+            }
+        }
+        matrix_indentity.elements.push(tmp_vec);
+    }
+    matrix_indentity
+}
 impl<K> Matrix<K>
 where
     K: Add<Output = K>
@@ -63,17 +91,21 @@ where
         + std::cmp::PartialOrd
         + std::ops::Div<Output = K>,
 {
-    fn found_pivot_and_transform_column(
+    fn found_pivot_and_transform_column_not_reduced(
         &mut self,
         pivot: &mut usize,
         index_column: &mut usize,
         index_initial: usize,
+        max_n: usize,
     ) {
         let mut max = (
             self.elements[*pivot][*index_column],
             *pivot,
             self.elements[*pivot].clone(),
         );
+        if *index_column >= max_n {
+            return;
+        }
         for i in *pivot..self.elements.len() {
             if max.0 < self.elements[i][*index_column] {
                 max.0 = self.elements[i][*index_column]; // le nbr max
@@ -90,7 +122,12 @@ where
             let un: usize = 1;
             *index_column = index_column.clone() + un;
             if *index_column < self.elements[*pivot].len() {
-                self.found_pivot_and_transform_column(pivot, index_column, index_initial);
+                self.found_pivot_and_transform_column_not_reduced(
+                    pivot,
+                    index_column,
+                    index_initial,
+                    max_n,
+                );
             }
             return;
         }
@@ -98,11 +135,9 @@ where
             max.2 = division_vec(max.2, max.0);
             if max.1 != *pivot {
                 self.elements[max.1] = self.elements[*index_column].clone();
-                // println!("cc {}", self.elements[i][index_column]);
             }
             let pivot_tmp = *pivot;
             self.elements[index_initial] = max.2.clone();
-            // println!("self {} ", self);
             let mut tmp = self.clone();
             *pivot = pivot_tmp + 1;
             for i in 0..tmp.elements.len() {
@@ -116,19 +151,23 @@ where
             }
         }
     }
-    pub fn row_echelon(&mut self) -> Matrix<K> {
+    fn get_rank_matrix(&mut self) -> usize {
         let mut pivot: usize = 0;
         let mut index_column: usize = 0;
         let mut newMatrix = self.clone();
         for (index, colum) in self.elements.iter_mut().enumerate() {
-            newMatrix.found_pivot_and_transform_column(&mut pivot, &mut index_column, index);
+            newMatrix.found_pivot_and_transform_column_not_reduced(
+                &mut pivot,
+                &mut index_column,
+                index,
+                newMatrix.size().0,
+            );
             index_column = index_column + 1;
         }
 
-        // il faut qu il y ai un 1 en first position de la premiere colone
-        // -> sois c un non null o debut et c ok
-        //sois tu vas echanger avec une ligne si ya un en first ou
-
-        newMatrix
+        pivot
+    }
+    pub fn rank(&mut self) -> usize {
+        self.get_rank_matrix()
     }
 }

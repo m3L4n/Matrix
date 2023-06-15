@@ -8,7 +8,7 @@ pub struct Matrix<K> {
 
 impl<K: fmt::Display> fmt::Display for Matrix<K> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "Matrix : [ ");
+        write!(f, "Matrix : \n[");
         for (index, row) in self.elements.iter().enumerate() {
             let row_str = row
                 .iter()
@@ -18,10 +18,10 @@ impl<K: fmt::Display> fmt::Display for Matrix<K> {
             if (self.elements.len() - 1) == index {
                 write!(f, "[{}]", row_str)?;
             } else {
-                write!(f, "[{}]", row_str)?;
+                write!(f, "[{}]\n", row_str)?;
             }
         }
-        write!(f, " ]");
+        write!(f, "]");
         Ok(())
     }
 }
