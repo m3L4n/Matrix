@@ -1,408 +1,255 @@
-mod cosine;
-mod cross_product;
-mod determinant;
-mod dot;
-mod inverse;
-mod lerp;
-mod linear_combination;
-mod matrix;
-mod matrix_multiplication;
-mod norm;
-mod rank;
-mod row_echelon_form;
-mod trace;
-mod transpose;
-mod vector;
-use crate::cosine::angle_cos;
-use crate::cross_product::cross_product;
-use crate::lerp::lerp;
-use crate::linear_combination::linear_combination;
-use crate::matrix::Matrix;
-use crate::vector::Vector;
+// mod cosine;
+// mod cross_product;
+// mod determinant;
+// mod dot;
+// mod inverse;
+
+mod linear {
+    pub mod lerp;
+    pub mod linear_combination;
+    pub mod tests {
+        pub mod tests_lerp;
+        pub mod tests_linear_combination;
+    }
+}
+mod dot {
+    pub mod dot;
+    pub mod tests {
+        pub mod tests_dot_product;
+    }
+}
+mod types {
+    pub mod matrix;
+    pub mod tests {
+        pub mod test_matrix_simple_operations;
+        pub mod test_vector_simple_operations;
+    }
+    pub mod vector;
+}
+mod norm {
+    pub mod norm;
+    pub mod norm_K;
+    pub mod tests {
+        pub mod tests_norme;
+    }
+}
+mod cosine {
+    pub mod cosine;
+    pub mod tests {
+        pub mod tests_cosine;
+    }
+}
+mod cross_product {
+    pub mod cross_product;
+    pub mod tests {
+        pub mod tests_cross_product;
+    }
+}
+mod matrix_mul {
+    pub mod matrix_multiplication;
+    pub mod tests {
+        pub mod tests_matrix_mul;
+    }
+}
+mod trace {
+    pub mod trace;
+    pub mod tests {
+        pub mod tests_trace;
+    }
+}
+mod transpose {
+    pub mod transpose;
+    pub mod tests {
+        pub mod tests_transpose;
+    }
+}
+mod row_reduce_form {
+    pub mod row_echelon_form;
+    pub mod tests {
+        pub mod tests_reduce_row_echelon;
+    }
+}
+mod determinant {
+    pub mod determinant;
+    pub mod tests {
+        pub mod tests_determinant;
+    }
+}
+use crate::cosine::tests::tests_cosine::tests_cosine;
+use crate::cross_product::tests::tests_cross_product::tests_cross_product;
+use crate::determinant::tests::tests_determinant::tests_determinant;
+use crate::dot::tests::tests_dot_product::tests_dot_product;
+use crate::linear::tests::tests_lerp::tests_lerp;
+use crate::linear::tests::tests_linear_combination::tests_linear_combination;
+use crate::matrix_mul::tests::tests_matrix_mul::tests_linear_map;
+use crate::matrix_mul::tests::tests_matrix_mul::tests_matrix_mul;
+use crate::norm::tests::tests_norme::tests_norme_EC;
+use crate::norm::tests::tests_norme::tests_norme_inf;
+use crate::norm::tests::tests_norme::tests_norme_mh;
+use crate::row_reduce_form::tests::tests_reduce_row_echelon::tests_row_echelon_form;
+use crate::trace::tests::tests_trace::tests_trace;
+use crate::transpose::tests::tests_transpose::tests_transpose;
+use crate::types::matrix::Matrix;
+use crate::types::tests::test_matrix_simple_operations::test_matrix_simple_operations_add;
+use crate::types::tests::test_matrix_simple_operations::test_matrix_simple_operations_scl;
+use crate::types::tests::test_matrix_simple_operations::test_matrix_simple_operations_sub;
+use crate::types::tests::test_vector_simple_operations::test_vector_simple_operations_add;
+use crate::types::tests::test_vector_simple_operations::test_vector_simple_operations_scl;
+use crate::types::tests::test_vector_simple_operations::test_vector_simple_operations_sub;
+use crate::types::vector::Vector;
+
 fn main() {
-    println!("------------------------------------------------------");
-    println!(" VECTOR");
-    println!("------------------------------------------------------");
-    println!("\x1B[32m                 ADD \x1B[0m");
-    println!("------------------------------------------------------");
-    let mut u = Vector::from(vec![2., 3.]);
-    let mut v = Vector::from(vec![5., 7.]);
-    let mut u1 = Vector::from(vec![9., -2.]);
-    let mut v1 = Vector::from(vec![19., 1.]);
-    println!("\x1B[32mimpression de u {}  v {}\x1B[0m", u, v);
-    u.add(&v);
-    println!("resultat de u + u1 {}", u);
-    println!("\x1B[32m\nimpression de v {}  u1 {}\x1B[0m", v, u1);
-    v.add(&u1);
-    println!("resultat de U + V {}", v);
-    println!("\x1B[32m\nimpression de u1 {}  uv1 {}\x1B[0m", u1, v1);
-    u1.add(&v1);
-    println!("resultat de U1 + V1 {}", u1);
-    println!("------------------------------------------------------");
-    println!("\x1B[32m                 SUB \x1B[0m");
-    println!("------------------------------------------------------");
-    // [7.0]
-    // [10.0]
-    u = Vector::from(vec![2., 3.]);
-    v = Vector::from(vec![5., 7.]);
-    u1 = Vector::from(vec![9., -2.]);
-    v1 = Vector::from(vec![19., 1.]);
-    println!("\x1B[32m\nimpression de u {}  v {}\x1B[0m", u, v);
-    u.sub(&v);
-    println!("resultat de U - V {}", u);
-    println!("\x1B[32mimpression de u {}  v {}\x1B[0m", u, v);
-    u.sub(&v);
-    println!("resultat de u - u1 {}", u);
-    println!("\x1B[32m\nimpression de v {}  u1 {}\x1B[0m", v, u1);
-    v.sub(&u1);
-    println!("resultat de U - V {}", v);
-    println!("\x1B[32m\nimpression de u1 {}  uv1 {}\x1B[0m", u1, v1);
-    u1.sub(&v1);
-    println!("resultat de U1 - V1 {}", u1);
-    println!("------------------------------------------------------");
-    println!("\x1B[32m                 SCL \x1B[0m");
-    println!("------------------------------------------------------");
-    u = Vector::from(vec![2., 3.]);
-    v = Vector::from(vec![5., 7.]);
-    u1 = Vector::from(vec![9., -2.]);
-    println!("\x1B[32m\nimpression de u {}\x1B[0m", u);
-    u.scl(2.0);
-    println!("resultat de U * 2.0 {}", u);
-    println!("\x1B[32mimpression de u {} \x1B[0m", u);
-    u.scl(9.);
-    println!("resultat de u * 9. {}", u);
-    println!("\x1B[32m\nimpression de v {}  \x1B[0m", v);
-    v.scl(0.);
-    println!("resultat de v * 0. {}", v);
-    println!("\x1B[32m\nimpression de u1 {} \x1B[0m", u1);
-    u1.scl(-2.);
-    println!("resultat de U1 * -2. {}", u1);
-    println!("------------------------------------------------------");
-    println!(" MATRIX");
-    println!("------------------------------------------------------");
-    println!("\x1B[32m                 ADD \x1B[0m");
-    println!("------------------------------------------------------");
-    let mut u = Matrix::from(vec![vec![1., 2.], vec![3., 4.]]);
-    let mut v = Matrix::from(vec![vec![7., 4.], vec![-2., 2.]]);
-    let mut u1 = Matrix::from(vec![vec![3., 2.], vec![5., 2.]]);
-    let v1 = Matrix::from(vec![vec![3., 99.], vec![-4., 0.]]);
-    println!("\x1B[32mimpression de u {}  v {}\x1B[0m", u, v);
-    u.add(&v);
-    println!("resultat de u + u1 {}", u);
-    println!("\x1B[32m\nimpression de v {}  u1 {}\x1B[0m", v, u1);
-    v.add(&u1);
-    println!("resultat de U + V {}", v);
-    println!("\x1B[32m\nimpression de u1 {}  uv1 {}\x1B[0m", u1, v1);
-    u1.add(&v1);
-    println!("resultat de U1 + V1 {}", u1);
-    println!("------------------------------------------------------");
-    println!("\x1B[32m                 SUB \x1B[0m");
-    println!("------------------------------------------------------");
-    let mut u = Matrix::from(vec![vec![1., 2.], vec![3., 4.]]);
-    let mut v = Matrix::from(vec![vec![7., 4.], vec![-2., 2.]]);
-    let mut u1 = Matrix::from(vec![vec![3., 2.], vec![5., 2.]]);
-    let v1 = Matrix::from(vec![vec![3., 99.], vec![-4., 0.]]);
-    println!("\x1B[32m\nimpression de u {}  v {}\x1B[0m", u, v);
-    u.sub(&v);
-    println!("resultat de U - V {}", u);
-    println!("\x1B[32mimpression de u {}  v {}\x1B[0m", u, v);
-    u.sub(&v);
-    println!("resultat de u - u1 {}", u);
-    println!("\x1B[32m\nimpression de v {}  u1 {}\x1B[0m", v, u1);
-    v.sub(&u1);
-    println!("resultat de U - V {}", v);
-    println!("\x1B[32m\nimpression de u1 {}  uv1 {}\x1B[0m", u1, v1);
-    u1.sub(&v1);
-    println!("resultat de U1 - V1 {}", u1);
-    println!("------------------------------------------------------");
-    println!("\x1B[32m                 SCL \x1B[0m");
-    println!("------------------------------------------------------");
-    let mut u = Matrix::from(vec![vec![1., 2.], vec![3., 4.]]);
-    let mut v = Matrix::from(vec![vec![7., 4.], vec![-2., 2.]]);
-    let mut u1 = Matrix::from(vec![vec![3., 2.], vec![5., 2.]]);
+    let args: Vec<String> = std::env::args().collect();
+    if args.len() > 1 {
+        let props = args[1].clone();
+        if props == "vec_add" {
+            test_vector_simple_operations_add();
+        } else if props == "matrix_add" {
+            test_matrix_simple_operations_add();
+        } else if props == "add" {
+            test_matrix_simple_operations_add();
+            test_vector_simple_operations_add();
+        } else if props == "vec_sub" {
+            test_vector_simple_operations_sub();
+        } else if props == "matrix_sub" {
+            test_matrix_simple_operations_sub();
+        } else if props == "sub" {
+            test_vector_simple_operations_sub();
+            test_matrix_simple_operations_sub();
+        } else if props == "vector_scl" {
+            test_vector_simple_operations_scl();
+        } else if props == "matrix_scl" {
+            test_matrix_simple_operations_scl();
+        } else if props == "scl" {
+            test_vector_simple_operations_scl();
+            test_matrix_simple_operations_scl();
+        } else if props == "linear_comb" {
+            tests_linear_combination();
+        } else if props == "lerp" {
+            tests_lerp();
+        } else if props == "dot" {
+            tests_dot_product();
+        } else if props == "EC" {
+            tests_norme_EC();
+        } else if props == "MH" {
+            tests_norme_mh();
+        } else if props == "inf" {
+            tests_norme_inf();
+        } else if props == "cosine" {
+            tests_cosine();
+        } else if props == "cp" {
+            tests_cross_product();
+        } else if props == "lm" {
+            tests_linear_map();
+        } else if props == "mm" {
+            tests_matrix_mul();
+        } else if props == "trace" {
+            tests_trace();
+        } else if props == "transpose" {
+            tests_transpose();
+        } else if props == "echelon" {
+            tests_row_echelon_form();
+        } else if props == "determinant" {
+            tests_determinant();
+        }
+    }
+    // println!("------------------------------------------------------");
+    // println!("ROW ECHELON FORM ");
+    // println!("------------------------------------------------------");
+    // let mut u = Matrix::from(vec![
+    //     vec![8., 5., -2., 4., 28.],
+    //     vec![4., 2.5, 20., 4., -4.],
+    //     vec![8., 5., 1., 4., 17.],
+    // ]);
+    // println!(" U : {}", u);
+    // println!("{}", u.row_echelon());
+    // let mut u = Matrix::from(vec![vec![1., 0., 0.], vec![0., 1., 0.], vec![0., 0., 1.]]);
+    // println!(" U : {}", u);
+    // println!("{}", u.row_echelon());
+    // let mut u = Matrix::from(vec![vec![1., 2.], vec![3., 4.]]);
+    // println!(" U : {}", u);
+    // println!("{}", u.row_echelon());
+    // let mut u = Matrix::from(vec![vec![1., 2.], vec![2., 4.]]);
+    // println!(" U : {}", u);
+    // println!("{}", u.row_echelon());
+    // let mut u = Matrix::from(vec![vec![4., 2.], vec![2., 1.]]);
+    // println!(" U : {}", u);
+    // println!("{}", u.row_echelon());
+    // println!("------------------------------------------------------");
+    // println!("DETERMINANT");
+    // println!("------------------------------------------------------");
+    // let mut u = Matrix::from(vec![vec![2., 0., 0.], vec![0., 2., 0.], vec![0., 0., 2.]]);
+    // println!(" U : {}", u);
+    // println!("{:?}", u.determinant());
+    // let mut u = Matrix::from(vec![
+    //     vec![2., 4., 5., 6.],
+    //     vec![-1., 5., 6., 9.],
+    //     vec![3., 7., 1., -6.],
+    //     vec![4., 2., 3., 5.],
+    // ]);
+    // println!(" U : {}", u);
+    // println!("{}", u.determinant());
+    // let mut u = Matrix::from(vec![vec![8., 5., -2.], vec![4., 7., 20.], vec![7., 6., 1.]]);
+    // println!(" U : {}", u);
+    // println!("{}", u.determinant());
+    // let mut u = Matrix::from(vec![
+    //     vec![8., 5., -2., 4.],
+    //     vec![4., 2.5, 20., 4.],
+    //     vec![8., 5., 1., 4.],
+    //     vec![28., -4., 17., 1.],
+    // ]);
+    // println!(" U : {}", u);
+    // println!("{}", u.determinant());
+    // println!("------------------------------------------------------");
+    // println!("INVERSE");
+    // println!("------------------------------------------------------");
+    // let mut u = Matrix::from(vec![vec![8., 5., -2.], vec![4., 7., 20.], vec![7., 6., 1.]]);
+    // let tet = u.inverse();
+    // if let Ok(description) = &tet {
+    //     println!("{}", description);
+    // }
 
-    println!("\x1B[32m\nimpression de u {}\x1B[0m", u);
-    u.scl(2.0);
-    println!("resultat de U * 2.0 {}", u);
-    println!("\x1B[32mimpression de u {} \x1B[0m", u);
-    u.scl(9.);
-    println!("resultat de u * 9. {}", u);
-    println!("\x1B[32m\nimpression de v {}  \x1B[0m", v);
-    v.scl(0.);
-    println!("resultat de v * 0. {}", v);
-    println!("\x1B[32m\nimpression de u1 {} \x1B[0m", u1);
-    u1.scl(-2.);
-    println!("resultat de U1 * -2. {}", u1);
-    println!("------------------------------------------------------");
-    println!("LINEAR COMBINATION");
-    println!(
-        "{}",
-        linear_combination(
-            &[
-                Vector::from(vec![1., 0., 0.]),
-                Vector::from(vec![0., 1., 0.]),
-                Vector::from(vec![0., 0., 1.])
-            ],
-            &[10., -2., 0.5]
-        )
-    );
+    // if let Err(err) = &tet {
+    //     println!("Error: {}", err);
+    // }
+    // let mut u = Matrix::from(vec![vec![1., 0., 0.], vec![0., 1., 0.], vec![0., 0., 1.]]);
+    // let tet = u.inverse();
+    // if let Ok(description) = &tet {
+    //     println!("{}", description);
+    // }
 
-    println!(
-        "{}",
-        linear_combination(
-            &[
-                Vector::from(vec![1., 2., 3.]),
-                Vector::from(vec![0., 10., -100.])
-            ],
-            &[10., -2.]
-        )
-    );
-    println!("------------------------------------------------------");
-    println!("------------------------------------------------------");
-    println!("Linear interpolation");
-    println!("------------------------------------------------------");
-    let u = Vector {
-        elements: vec![2.1, 1.0],
-    };
-    let v = Vector {
-        elements: vec![4.0, 2.0],
-    };
-    let t = 0.3;
-    println!("{}", lerp(u, v, t));
-    println!("{}", lerp(0., 1., 0.));
-    // 0.0
-    println!("{}", lerp(0., 1., 1.));
-    // 1.0
-    println!("{}", lerp(0., 1., 0.5));
-    // 0.5
-    println!("{}", lerp(21., 42., 0.3));
-    // //     // Tests avec des Matrix<f32>
-    let matrix_a = Matrix::from(vec![vec![2., 1.], vec![3., 4.]]);
-    let matrix_b = Matrix::from(vec![vec![20., 10.], vec![30., 40.]]);
-    println!("{}", lerp(matrix_a.clone(), matrix_b.clone(), 0.5));
-    println!("------------------------------------------------------");
-    println!("DOT PRODUCT");
-    println!("------------------------------------------------------");
-    let mut u = Vector::from(vec![0., 0.]);
-    let v = Vector::from(vec![1., 1.]);
-    println!("{}", u.dot(v));
-    // 0.0
-    let mut u = Vector::from(vec![1., 1.]);
-    let v = Vector::from(vec![1., 1.]);
-    println!("{}", u.dot(v));
-    // 2.0
-    let mut u = Vector::from(vec![-1., 6.]);
-    let v = Vector::from(vec![3., 2.]);
-    println!("{}", u.dot(v));
-    println!("------------------------------------------------------");
-    println!("NORM");
-    println!("------------------------------------------------------");
-    let mut u = Vector::from(vec![0., 0., 0.]);
-    println!("{}, {}, {}", u.norm_1(), u.norm(), u.norm_inf());
-    // 0.0, 0.0, 0.0
-    let mut u = Vector::from(vec![1., 2., 3.]);
-    println!("{}, {}, {}", u.norm_1(), u.norm(), u.norm_inf());
-    // 6.0, 3.74165738, 3.0
-    let mut u = Vector::from(vec![-1., -2.]);
-    println!("{}, {}, {}", u.norm_1(), u.norm(), u.norm_inf());
-    let mut u = Vector::from(vec![4., 2.]);
-    println!("{}, {}, {}", u.norm_1(), u.norm(), u.norm_inf());
-    let mut u = Vector::from(vec![2., 1.]);
-    println!("{}, {}, {}", u.norm_1(), u.norm(), u.norm_inf());
-    let mut u = Vector::from(vec![-4., -2.]);
-    println!("{}, {}, {}", u.norm_1(), u.norm(), u.norm_inf());
-    // 3.0, 2.236067977, 2.0
-    println!("------------------------------------------------------");
-    println!("COSINE");
-    println!("------------------------------------------------------");
-    let mut u = Vector::from(vec![1., 2., 3.]);
-    let mut v = Vector::from(vec![4., 5., 6.]);
-    println!("{}", angle_cos(&u, &v));
-    let u = Vector::from(vec![1., 0.]);
-    let v = Vector::from(vec![1., 0.]);
-    println!("{}", angle_cos(&u, &v));
-    // 1.0
-    let u = Vector::from(vec![1., 0.]);
-    let v = Vector::from(vec![0., 1.]);
-    println!("{}", angle_cos(&u, &v));
-    // 0.0
-    let u = Vector::from(vec![-1., 1.]);
-    let v = Vector::from(vec![1., -1.]);
-    println!("{}", angle_cos(&u, &v));
-    // -1.0
-    let u = Vector::from(vec![2., 1.]);
-    let v = Vector::from(vec![4., 2.]);
-    println!("{}", angle_cos(&u, &v));
-    // 1.0
-    // 0.974631846
-    println!("------------------------------------------------------");
-    println!("COSINE");
-    println!("------------------------------------------------------");
-    let u = Vector::from(vec![0., 0., 1.]);
-    let v = Vector::from(vec![1., 0., 0.]);
-    println!("{}", cross_product(&u, &v));
-    // [0.]
-    // [1.]
-    // [0.]
-    let u = Vector::from(vec![1., 2., 3.]);
-    let v = Vector::from(vec![4., 5., 6.]);
-    println!("{}", cross_product(&u, &v));
-    // [-3.]
-    // [6.]
-    // [-3.]
-    let u = Vector::from(vec![4., 2., -3.]);
-    let v = Vector::from(vec![-2., -5., 16.]);
-    println!("{}", cross_product(&u, &v));
-    // [17.]
-    // [-58.]
-    // [-16.]
-    println!("------------------------------------------------------");
-    println!("MATRIX MULTIPLICATION");
-    println!("------------------------------------------------------");
-    println!("MATRIX MULTIPLICATION WITH VECTOR");
-    println!("------------------------------------------------------");
-    let mut u = Matrix::from(vec![vec![1., 0.], vec![0., 1.]]);
-    let v = Vector::from(vec![4., 2.]);
-    println!("{}", u.mul_vec(v));
-    // [4.]
-    // [2.]
-    let mut u = Matrix::from(vec![vec![2., 0.], vec![0., 2.]]);
-    let v = Vector::from(vec![4., 2.]);
-    println!("{}", u.mul_vec(v));
-    // [8.]
-    // [4.]
-    let mut u = Matrix::from(vec![vec![2., -2.], vec![-2., 2.]]);
-    let v = Vector::from(vec![4., 2.]);
-    println!("{}", u.mul_vec(v));
-    // [4.]
-    // [-4.]
-    println!("------------------------------------------------------");
-    println!("MATRIX MULTIPLICATION WITH MATRIX");
-    println!("------------------------------------------------------");
-    let mut u = Matrix::from(vec![vec![3., -5.], vec![6., 8.]]);
-    let mut v = Matrix::from(vec![vec![2., 1.], vec![4., 2.]]);
-    println!("{}", u.mul_mat(v));
-    let mut u = Matrix::from(vec![vec![3.], vec![6.]]);
-    let mut v = Matrix::from(vec![vec![2.]]);
-    println!("{}", u.mul_mat(v));
-    println!("------------------------------------------------------");
-    println!("TRACE ");
-    println!("------------------------------------------------------");
-    let mut u = Matrix::from(vec![vec![1., 0.], vec![0., 1.]]);
-    println!("{}", u.trace());
-    // 2.0
-    let mut u = Matrix::from(vec![vec![2., -5., 0.], vec![4., 3., 7.], vec![-2., 3., 4.]]);
-    println!("{}", u.trace());
-    // 9.0
-    let mut u = Matrix::from(vec![
-        vec![-2., -8., 4.],
-        vec![1., -23., 4.],
-        vec![0., 6., 4.],
-    ]);
-    println!("{}", u.trace());
-    // -21.0
-    println!("------------------------------------------------------");
-    println!("TRANSPOSE ");
-    println!("------------------------------------------------------");
-    let mut u = Matrix::from(vec![vec![1., -2., 3.]]);
-    println!("{}", u.transpose());
-    let mut u = Matrix::from(vec![vec![3., -1.], vec![0., 2.], vec![1., -4.]]);
-    println!("{}", u.transpose());
-    let mut u = Matrix::from(vec![vec![-1., 3.], vec![0., 2.]]);
-    println!("{}", u.transpose());
-    let mut u = Matrix::from(vec![
-        vec![1., 0., -2.],
-        vec![-4., 1., 7.],
-        vec![5., -3., 2.],
-    ]);
-    println!("{}", u.transpose());
-    let mut u = Matrix::from(vec![vec![1., 0., 0.], vec![0., -2., 0.], vec![0., 0., 5.]]);
-    println!("{}", u.transpose());
-    println!("------------------------------------------------------");
-    println!("ROW ECHELON FORM ");
-    println!("------------------------------------------------------");
-    let mut u = Matrix::from(vec![
-        vec![8., 5., -2., 4., 28.],
-        vec![4., 2.5, 20., 4., -4.],
-        vec![8., 5., 1., 4., 17.],
-    ]);
-    println!(" U : {}", u);
-    println!("{}", u.row_echelon());
-    let mut u = Matrix::from(vec![vec![1., 0., 0.], vec![0., 1., 0.], vec![0., 0., 1.]]);
-    println!(" U : {}", u);
-    println!("{}", u.row_echelon());
-    let mut u = Matrix::from(vec![vec![1., 2.], vec![3., 4.]]);
-    println!(" U : {}", u);
-    println!("{}", u.row_echelon());
-    let mut u = Matrix::from(vec![vec![1., 2.], vec![2., 4.]]);
-    println!(" U : {}", u);
-    println!("{}", u.row_echelon());
-    let mut u = Matrix::from(vec![vec![4., 2.], vec![2., 1.]]);
-    println!(" U : {}", u);
-    println!("{}", u.row_echelon());
-    println!("------------------------------------------------------");
-    println!("DETERMINANT");
-    println!("------------------------------------------------------");
-    let mut u = Matrix::from(vec![vec![2., 0., 0.], vec![0., 2., 0.], vec![0., 0., 2.]]);
-    println!(" U : {}", u);
-    println!("{:?}", u.determinant());
-    let mut u = Matrix::from(vec![
-        vec![2., 4., 5., 6.],
-        vec![-1., 5., 6., 9.],
-        vec![3., 7., 1., -6.],
-        vec![4., 2., 3., 5.],
-    ]);
-    println!(" U : {}", u);
-    println!("{}", u.determinant());
-    let mut u = Matrix::from(vec![vec![8., 5., -2.], vec![4., 7., 20.], vec![7., 6., 1.]]);
-    println!(" U : {}", u);
-    println!("{}", u.determinant());
-    let mut u = Matrix::from(vec![
-        vec![8., 5., -2., 4.],
-        vec![4., 2.5, 20., 4.],
-        vec![8., 5., 1., 4.],
-        vec![28., -4., 17., 1.],
-    ]);
-    println!(" U : {}", u);
-    println!("{}", u.determinant());
-    println!("------------------------------------------------------");
-    println!("INVERSE");
-    println!("------------------------------------------------------");
-    let mut u = Matrix::from(vec![vec![8., 5., -2.], vec![4., 7., 20.], vec![7., 6., 1.]]);
-    let tet = u.inverse();
-    if let Ok(description) = &tet {
-        println!("{}", description);
-    }
+    // if let Err(err) = &tet {
+    //     println!("Error: {}", err);
+    // }
+    // let mut u = Matrix::from(vec![vec![2., 0., 0.], vec![0., 2., 0.], vec![0., 0., 2.]]);
+    // let tet = u.inverse();
+    // if let Ok(description) = &tet {
+    //     println!("{}", description);
+    // }
 
-    if let Err(err) = &tet {
-        println!("Error: {}", err);
-    }
-    let mut u = Matrix::from(vec![vec![1., 0., 0.], vec![0., 1., 0.], vec![0., 0., 1.]]);
-    let tet = u.inverse();
-    if let Ok(description) = &tet {
-        println!("{}", description);
-    }
-
-    if let Err(err) = &tet {
-        println!("Error: {}", err);
-    }
-    let mut u = Matrix::from(vec![vec![2., 0., 0.], vec![0., 2., 0.], vec![0., 0., 2.]]);
-    let tet = u.inverse();
-    if let Ok(description) = &tet {
-        println!("{}", description);
-    }
-
-    if let Err(err) = &tet {
-        println!("Error: {}", err);
-    }
-    println!("------------------------------------------------------");
-    println!("RANK");
-    println!("------------------------------------------------------");
-    let mut u = Matrix::from(vec![vec![8., 5., -2.], vec![4., 7., 20.], vec![7., 6., 1.]]);
-    println!(" U : {}", u);
-    println!("{}", u.rank());
+    // if let Err(err) = &tet {
+    //     println!("Error: {}", err);
+    // }
+    // println!("------------------------------------------------------");
+    // println!("RANK");
+    // println!("------------------------------------------------------");
+    // let mut u = Matrix::from(vec![vec![8., 5., -2.], vec![4., 7., 20.], vec![7., 6., 1.]]);
+    // println!(" U : {}", u);
+    // println!("{}", u.rank());
 
     // [1.0, 0.625, 0.0, 0.0, -12.1666667]
     // [0.0, 0.0, 1.0, 0.0, -3.6666667]
     // [0.0, 0.0, 0.0, 1.0, 29.5 ]
+}
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn tests_simple_operations_vec() {
+        test_vector_simple_operations_add()
+    }
+    // #[test]
+    // fn tests_simple_operation_vec() {
+    //     test_simple_operation_vec();
+    // }
 }

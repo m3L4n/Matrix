@@ -1,20 +1,13 @@
-/Users/macbookair/42/THE_MATRIX/target/debug/deps/THE_MATRIX-25ac21a1453f274e.rmeta: src/main.rs src/cosine.rs src/cross_product.rs src/determinant.rs src/dot.rs src/inverse.rs src/lerp.rs src/linear_combination.rs src/matrix.rs src/matrix_multiplication.rs src/norm.rs src/rank.rs src/row_echelon_form.rs src/trace.rs src/transpose.rs src/vector.rs
+/Users/macbookair/42/Matrix/target/debug/deps/THE_MATRIX-25ac21a1453f274e.rmeta: src/main.rs src/linear/lerp.rs src/linear/linear_combination.rs src/linear/tests/tests_lerp.rs src/linear/tests/tests_linear_combination.rs src/types/matrix.rs src/types/tests/test_matrix_simple_operations.rs src/types/tests/test_vector_simple_operations.rs src/types/vector.rs
 
-/Users/macbookair/42/THE_MATRIX/target/debug/deps/THE_MATRIX-25ac21a1453f274e.d: src/main.rs src/cosine.rs src/cross_product.rs src/determinant.rs src/dot.rs src/inverse.rs src/lerp.rs src/linear_combination.rs src/matrix.rs src/matrix_multiplication.rs src/norm.rs src/rank.rs src/row_echelon_form.rs src/trace.rs src/transpose.rs src/vector.rs
+/Users/macbookair/42/Matrix/target/debug/deps/THE_MATRIX-25ac21a1453f274e.d: src/main.rs src/linear/lerp.rs src/linear/linear_combination.rs src/linear/tests/tests_lerp.rs src/linear/tests/tests_linear_combination.rs src/types/matrix.rs src/types/tests/test_matrix_simple_operations.rs src/types/tests/test_vector_simple_operations.rs src/types/vector.rs
 
 src/main.rs:
-src/cosine.rs:
-src/cross_product.rs:
-src/determinant.rs:
-src/dot.rs:
-src/inverse.rs:
-src/lerp.rs:
-src/linear_combination.rs:
-src/matrix.rs:
-src/matrix_multiplication.rs:
-src/norm.rs:
-src/rank.rs:
-src/row_echelon_form.rs:
-src/trace.rs:
-src/transpose.rs:
-src/vector.rs:
+src/linear/lerp.rs:
+src/linear/linear_combination.rs:
+src/linear/tests/tests_lerp.rs:
+src/linear/tests/tests_linear_combination.rs:
+src/types/matrix.rs:
+src/types/tests/test_matrix_simple_operations.rs:
+src/types/tests/test_vector_simple_operations.rs:
+src/types/vector.rs:
