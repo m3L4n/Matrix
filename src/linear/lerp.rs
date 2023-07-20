@@ -1,7 +1,4 @@
 //https://www.alanzucconi.com/2021/01/24/linear-interpolation/
-use crate::Matrix;
-use crate::Vector;
-use std::ops::{Add, Mul, Sub};
 
 pub fn lerp<
     V: std::ops::Add<Output = V> + std::ops::Mul<f32, Output = V> + std::ops::Sub<Output = V> + Clone,

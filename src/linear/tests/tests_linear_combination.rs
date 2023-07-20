@@ -1,5 +1,4 @@
 use crate::linear::linear_combination::linear_combination;
-use crate::types::matrix::Matrix;
 use crate::types::vector::Vector;
 use std::vec;
 

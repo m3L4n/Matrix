@@ -49,10 +49,10 @@ impl<
             *element = element.clone() * a;
         }
     }
-    pub fn size(self) -> usize {
-        let row_size: usize = self.elements.len();
-        row_size
-    }
+    // pub fn size(self) -> usize {
+    //     let row_size: usize = self.elements.len();
+    //     row_size
+    // }
     fn adde(&mut self, v: &Vector<K>) -> Vector<K> {
         let mut new_vector = self.clone();
         for (elem1, elem2) in new_vector.elements.iter_mut().zip(v.elements.iter()) {

@@ -32,9 +32,9 @@ where
     };
     let norm_u: f32 = vec_u.norm();
     let norm_v: f32 = vec_v.norm();
-    let dot_U_V = vec_u.dot(vec_v);
+    let dot_u_v = vec_u.dot(vec_v);
     let dot_norm_u_v = get_dot_f32(norm_u, norm_v); //32.832910318764
-    let angle_cos = dot_U_V / dot_norm_u_v;
+    let angle_cos = dot_u_v / dot_norm_u_v;
     angle_cos
     // norm (u ) norm (v)
     // dot (u, v)

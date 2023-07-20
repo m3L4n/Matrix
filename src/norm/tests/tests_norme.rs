@@ -1,7 +1,6 @@
-use crate::norm::norm;
 use crate::norm::norm::Vector;
 use std::vec;
-pub fn tests_norme_EC() {
+pub fn tests_norme_ec() {
     println!("------------------------------------------------------");
     println!("NORM EUCLIDIAN");
     println!("------------------------------------------------------");

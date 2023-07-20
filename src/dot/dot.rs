@@ -1,13 +1,11 @@
 use crate::Vector;
-use std::ops::{Mul, MulAssign};
+use std::ops::MulAssign;
 
 impl<K> Vector<K>
 where
     K: MulAssign<K> + Clone + std::ops::Mul<Output = K> + std::ops::Add<Output = K>,
 {
     pub fn dot(&self, v: Vector<K>) -> K {
-        let angle_degrees: f32 = 59.5;
-        let angle_radians = angle_degrees.to_radians();
         if self.elements.is_empty() || v.elements.is_empty() {
             panic!("can't do operation");
         }

@@ -1,5 +1,4 @@
 use crate::cross_product::cross_product::cross_product;
-use crate::Matrix;
 use crate::Vector;
 use std::vec;
 pub fn tests_cross_product() {

@@ -70,15 +70,11 @@ impl Vector {
             values: values.into_iter().map(|v| v.into().0).collect(),
         }
     }
-
-    pub fn sum(&self) -> f32 {
-        self.values.iter().sum()
-    }
     pub fn norm(&mut self) -> f32 {
         let mut result_euclidean: f32 = 0.0;
-        if self.values.len() < 0 {
-            panic!(" the len is equal to 0");
-        }
+        // if self.values.len() < 0 {
+        //     panic!(" the len is equal to 0");
+        // }
         for element in &self.values {
             let squared: f32 = element.clone() * element.clone();
             result_euclidean = result_euclidean + squared;
@@ -89,9 +85,9 @@ impl Vector {
     }
     pub fn norm_1(&mut self) -> f32 {
         let mut norm: f32 = 0.0;
-        if self.values.len() < 0 {
-            panic!(" the len is equal to 0");
-        }
+        // if self.values.len() < 0 {
+        //     panic!(" the len is equal to 0");
+        // }
         for element in &self.values {
             norm = (element.clone()) + norm;
         }
@@ -101,9 +97,9 @@ impl Vector {
         norm
     }
     pub fn norm_inf(&mut self) -> f32 {
-        if self.values.len() < 0 {
-            panic!(" the len is equal to 0");
-        }
+        // if self.values.len() < 0 {
+        //     panic!(" the len is equal to 0");
+        // }
         let mut norm: f32 = self.values[0].clone().into();
 
         for element in &self.values {

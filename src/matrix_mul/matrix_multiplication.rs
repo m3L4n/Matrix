@@ -34,12 +34,12 @@ where
         for i in 0..vec_a.len() {
             res_to_send = res_to_send + vec_a[i] * vec_b[i];
         }
-        for (index, row) in vec_a.iter().enumerate() {}
+        // for (index, row) in vec_a.iter().enumerate() {}
         res_to_send
     }
     pub fn get_matrix_colum(&mut self) -> Matrix<K> {
         let mut matrix_to_send = Matrix { elements: vec![] };
-        for i in 0..self.elements[0].len() {
+        for _i in 0..self.elements[0].len() {
             matrix_to_send.elements.push(vec![]);
         }
         for row in self.elements.iter() {
@@ -58,7 +58,7 @@ where
         if size_matrix_1.1 != size_matrix_2.0 {
             panic!("cant do that not good size, the row doesnt match with column");
         }
-        for (index, row) in self.elements.iter().enumerate() {
+        for (_index, row) in self.elements.iter().enumerate() {
             let mut new_new_row: Vec<K> = vec![];
             for mat_row in mat_column_good.elements.iter() {
                 new_new_row.push(Self::dot_product_with_vec(row.clone(), mat_row.clone()));

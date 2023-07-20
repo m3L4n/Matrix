@@ -1,5 +1,4 @@
 use crate::Matrix;
-use std::ops::{Add, Mul, Sub};
 pub fn tests_determinant() {
     println!("------------------------------------------------------");
     println!("DETERMINANT");
@@ -17,7 +16,7 @@ pub fn tests_determinant() {
     ]);
     println!(" U : {}", u);
     println!("result :{:?}", u.determinant());
-    // assert_eq!(u.determinant(), 1032.0);
+    assert_eq!(u.determinant(), -288.0);
     println!("------------------------------------------------------");
     let mut u = Matrix::from(vec![vec![8., 5., -2.], vec![4., 7., 20.], vec![7., 6., 1.]]);
     println!(" U : {}", u);
@@ -73,5 +72,17 @@ pub fn tests_determinant() {
     println!(" U : {}", u);
     println!("result :{:?}", u.determinant());
     assert_eq!(u.determinant(), 1.0);
+    println!("------------------------------------------------------");
+    let mut u = Matrix::from(vec![vec![1., 4., 2.], vec![1., 4., 2.], vec![3., 9., 5.]]);
+    println!(" U : {}", u);
+    println!("result :{:?}", u.determinant());
+    assert_eq!(u.determinant(), 0.0);
+    println!("------------------------------------------------------");
+    let mut u = Matrix::from(vec![vec![1, 4, 2], vec![0, 0, 0], vec![3, 9, 5]]);
+    assert_eq!(u.determinant(), 0);
+    println!("------------------------------------------------------");
+
+    let mut u = Matrix::from(vec![vec![1, 4, 2], vec![3, 9, 5], vec![3, 9, 5]]);
+    assert_eq!(u.determinant(), 0);
     println!("------------------------------------------------------");
 }

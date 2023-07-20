@@ -8,7 +8,7 @@ pub struct Matrix<K> {
 
 impl<K: fmt::Display> fmt::Display for Matrix<K> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "Matrix : \n[");
+        let _tmp = write!(f, "Matrix : \n[");
         for (index, row) in self.elements.iter().enumerate() {
             let row_str = row
                 .iter()
@@ -21,7 +21,7 @@ impl<K: fmt::Display> fmt::Display for Matrix<K> {
                 write!(f, "[{}]\n", row_str)?;
             }
         }
-        write!(f, "]");
+        let _tmp = write!(f, "]");
         Ok(())
     }
 }
@@ -50,13 +50,13 @@ impl<
         if !self.is_same_size(&v) {
             panic!("cant add to matrix bc its not the right size")
         }
-        let mut newMatrix = self.clone();
-        for (colum1, column2) in newMatrix.elements.iter_mut().zip(v.elements.iter()) {
+        let mut new_matrix = self.clone();
+        for (colum1, column2) in new_matrix.elements.iter_mut().zip(v.elements.iter()) {
             for (row1, row2) in colum1.iter_mut().zip(column2.iter()) {
                 *row1 = row1.clone() + row2.clone();
             }
         }
-        newMatrix
+        new_matrix
     }
     pub fn sub(&mut self, v: &Matrix<K>) {
         if !self.is_same_size(&v) {
@@ -72,13 +72,13 @@ impl<
         if !self.is_same_size(&v) {
             panic!("cant add to matrix bc its not the right size")
         }
-        let mut newMatrix = self.clone();
-        for (colum1, column2) in newMatrix.elements.iter_mut().zip(v.elements.iter()) {
+        let mut new_matrix = self.clone();
+        for (colum1, column2) in new_matrix.elements.iter_mut().zip(v.elements.iter()) {
             for (row1, row2) in colum1.iter_mut().zip(column2.iter()) {
                 *row1 = row1.clone() - row2.clone();
             }
         }
-        newMatrix
+        new_matrix
     }
     pub fn scl(&mut self, a: K) {
         for row in self.elements.iter_mut() {
@@ -127,8 +127,8 @@ impl<
 {
     type Output = Matrix<K>;
     fn add(self, other: Matrix<K>) -> Matrix<K> {
-        let mut new_Matrix = self.clone();
-        let tmp = new_Matrix.adde(&other);
+        let mut new_matrix = self.clone();
+        let tmp = new_matrix.adde(&other);
         tmp
     }
 }
@@ -158,8 +158,8 @@ where
 {
     type Output = Matrix<K>;
     fn sub(self, other: Matrix<K>) -> Matrix<K> {
-        let mut new_Matrix = self.clone();
-        let tmp = new_Matrix.sube(&other);
+        let mut new_matrix = self.clone();
+        let tmp = new_matrix.sube(&other);
         tmp
     }
 }

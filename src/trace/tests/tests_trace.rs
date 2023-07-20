@@ -1,5 +1,4 @@
 use crate::Matrix;
-use crate::Vector;
 pub fn tests_trace() {
     println!("------------------------------------------------------");
     println!("TRACE ");

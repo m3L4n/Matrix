@@ -8,11 +8,11 @@ pub fn test_matrix_simple_operations_add() {
     println!("\x1B[32m                 ADD \x1B[0m");
     println!("------------------------------------------------------");
     let mut u = Matrix::from(vec![vec![0., 0.], vec![0., 0.]]);
-    let mut v = Matrix::from(vec![vec![1., 0.], vec![-1., 0.]]);
+    let v = Matrix::from(vec![vec![1., 0.], vec![-1., 0.]]);
     let mut u1 = Matrix::from(vec![vec![21.1, 21.2], vec![21.3, 21.4]]);
     let v1 = Matrix::from(vec![vec![21.1, 21.2], vec![21.3, 21.4]]);
     let mut z = Matrix::from(vec![vec![10.2, 19.3], vec![230.1, 344.0, 2010.0]]);
-    let mut x = Matrix::from(vec![vec![100.2, 190.3], vec![2300.1, 3440.0, 20100.0]]);
+    let x = Matrix::from(vec![vec![100.2, 190.3], vec![2300.1, 3440.0, 20100.0]]);
     println!("vector 1 : \n{}vector 2 : \n{}", u, v);
     u.add(&v);
     println!(" resuslt v1 + v2 {}", u);
@@ -43,11 +43,11 @@ pub fn test_matrix_simple_operations_sub() {
     println!("\x1B[32m                 SUB \x1B[0m");
     println!("------------------------------------------------------");
     let mut u = Matrix::from(vec![vec![0., 0.], vec![0., 0.]]);
-    let mut v = Matrix::from(vec![vec![1., 0.], vec![-1., 0.]]);
+    let v = Matrix::from(vec![vec![1., 0.], vec![-1., 0.]]);
     let mut u1 = Matrix::from(vec![vec![21.1, 21.2], vec![21.3, 21.4]]);
     let v1 = Matrix::from(vec![vec![21.1, 21.2], vec![21.3, 21.4]]);
     let mut z = Matrix::from(vec![vec![10.2, 19.3], vec![230.1, 344.0, 2010.0]]);
-    let mut x = Matrix::from(vec![vec![100.2, 190.3], vec![2300.1, 3440.0, 20100.0]]);
+    let x = Matrix::from(vec![vec![100.2, 190.3], vec![2300.1, 3440.0, 20100.0]]);
     println!("vector 1 : \n{}vector 2 : \n{}", u, v);
     u.sub(&v);
     println!(" resuslt v1 - v2 {}", u);

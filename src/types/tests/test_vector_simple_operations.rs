@@ -10,7 +10,7 @@ pub fn test_vector_simple_operations_add() {
     let mut first_vector = Vector::from(vec![2., 3.]);
     let mut second_vector = Vector::from(vec![5., 7.]);
     let mut third_vector = Vector::from(vec![9., -2.]);
-    let mut four_vector = Vector::from(vec![19., 1.]);
+    let four_vector = Vector::from(vec![19., 1.]);
     println!(
         "\x1B[32mimpression de u {}  v {}\x1B[0m",
         first_vector, second_vector
@@ -38,9 +38,9 @@ pub fn test_vector_simple_operations_add() {
     println!("------------------------------------------------------");
 
     let mut first_vector = Vector::from(vec![0., 0.]);
-    let mut second_vector = Vector::from(vec![0., 0.]);
+    let second_vector = Vector::from(vec![0., 0.]);
     let mut third_vector = Vector::from(vec![-21., 21.]);
-    let mut four_vector = Vector::from(vec![21., -21.]);
+    let four_vector = Vector::from(vec![21., -21.]);
 
     println!(
         "\x1B[32mimpression de first {}  second {}\x1B[0m",
@@ -59,7 +59,7 @@ pub fn test_vector_simple_operations_add() {
     assert_eq!(third_vector.elements, vec![(-21. + 21.), (21. + -21.)]);
     println!("------------------------------------------------------");
     let mut first_vector = Vector::from(vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-    let mut second_vector = Vector::from(vec![9, 8, 7, 6, 5, 4, 3, 2, 1, 0]);
+    let second_vector = Vector::from(vec![9, 8, 7, 6, 5, 4, 3, 2, 1, 0]);
     println!(
         "\x1B[32mimpression de first {}  second {}\x1B[0m",
         first_vector, second_vector
@@ -78,7 +78,7 @@ pub fn test_vector_simple_operations_sub() {
     let mut first_vector = Vector::from(vec![2., 3.]);
     let mut second_vector = Vector::from(vec![5., 7.]);
     let mut third_vector = Vector::from(vec![9., -2.]);
-    let mut four_vector = Vector::from(vec![19., 1.]);
+    let four_vector = Vector::from(vec![19., 1.]);
     println!(
         "\x1B[32mimpression de u {}  v {}\x1B[0m",
         first_vector, second_vector
@@ -106,9 +106,9 @@ pub fn test_vector_simple_operations_sub() {
     println!("------------------------------------------------------");
 
     let mut first_vector = Vector::from(vec![0., 0.]);
-    let mut second_vector = Vector::from(vec![0., 0.]);
+    let second_vector = Vector::from(vec![0., 0.]);
     let mut third_vector = Vector::from(vec![-21., 21.]);
-    let mut four_vector = Vector::from(vec![21., -21.]);
+    let four_vector = Vector::from(vec![21., -21.]);
 
     println!(
         "\x1B[32mimpression de first {}  second {}\x1B[0m",
@@ -127,7 +127,7 @@ pub fn test_vector_simple_operations_sub() {
     assert_eq!(third_vector.elements, vec![(-21. - 21.), (21. - -21.)]);
     println!("------------------------------------------------------");
     let mut first_vector = Vector::from(vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-    let mut second_vector = Vector::from(vec![9, 8, 7, 6, 5, 4, 3, 2, 1, 0]);
+    let second_vector = Vector::from(vec![9, 8, 7, 6, 5, 4, 3, 2, 1, 0]);
     println!(
         "\x1B[32mimpression de first {}  second {}\x1B[0m",
         first_vector, second_vector

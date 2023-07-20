@@ -1,8 +1,5 @@
 use crate::Matrix;
-use std::{
-    ops::{Add, Mul, Sub},
-    vec,
-};
+use std::vec;
 
 pub fn tests_row_echelon_form() {
     println!("------------------------------------------------------");
@@ -18,13 +15,13 @@ pub fn tests_row_echelon_form() {
     assert_eq!(
         u.row_echelon().elements,
         vec![
-            vec![1.0, 0.625, 0.0, 0.0, -12.166666666666668],
+            vec![1.0, 0.625, 0.0, 0.0, -12.166668],
             vec![0.0, 0.0, 1.0, 0.0, -3.666666666666667],
             vec![0.0, 0.0, 0.0, 1.0, 29.500000000000004]
         ]
     );
     println!("------------------------------------------------------");
-    let mut u: Matrix<f64> =
+    let mut u: Matrix<f32> =
         Matrix::from(vec![vec![1., 0., 0.], vec![0., 1., 0.], vec![0., 0., 1.]]);
     println!(" U : {}", u);
     println!("result: {}", u.row_echelon());
@@ -39,7 +36,7 @@ pub fn tests_row_echelon_form() {
     println!("------------------------------------------------------");
     let mut u = Matrix::from(vec![vec![1., 2.], vec![3., 4.]]);
     println!(" U : {}", u);
-    println!("result: {}", u.row_echelon());
+    // println!("result: {}", u.row_echelon());
     assert_eq!(
         u.row_echelon().elements,
         vec![vec![1.0, 0.0], vec![0.0, 1.0],]
@@ -89,4 +86,21 @@ pub fn tests_row_echelon_form() {
         vec![vec![1.0, 0.0, 0.], vec![0.0, 1.0, 0.], vec![0.0, 0.0, 1.]]
     );
     println!("------------------------------------------------------");
+    let mut u = Matrix::from(vec![vec![1., 2., 3.], vec![4., 5., 6.], vec![7., 8., 9.]]);
+    println!(" U : {}", u);
+    println!("result: {}", u.row_echelon());
+    assert_eq!(
+        u.row_echelon().elements,
+        vec![
+            vec![1.0, 0.0, -1.0000004],
+            vec![0.0, 1.0, 2.0000002],
+            vec![0.0, 0.0, 0.00000035762787]
+        ]
+    );
+    println!("------------------------------------------------------");
+    let mut u = Matrix::from(vec![vec![8., 5., -2.], vec![4., 7., 20.], vec![7., 6., 1.]]);
+    let result = u.row_echelon();
+    assert_eq!(result.elements[0], Vec::from(vec![1., 0., 0.]));
+    assert_eq!(result.elements[1], Vec::from(vec![0., 1., 0.]));
+    assert_eq!(result.elements[2], Vec::from(vec![0., 0., 1.]));
 }

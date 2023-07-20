@@ -1,13 +1,12 @@
 use crate::cosine::cosine::angle_cos;
-use crate::Matrix;
 use crate::Vector;
 use std::vec;
 pub fn tests_cosine() {
     println!("------------------------------------------------------");
     println!("COSINE");
     println!("------------------------------------------------------");
-    let mut u = Vector::from(vec![1., 2., 3.]);
-    let mut v = Vector::from(vec![4., 5., 6.]);
+    let u = Vector::from(vec![1., 2., 3.]);
+    let v = Vector::from(vec![4., 5., 6.]);
     println!("test with\n{}\n{}", u, v);
     println!("{}", angle_cos(&u, &v));
     assert_eq!(angle_cos(&u, &v), 0.9746318);
@@ -143,8 +142,8 @@ pub fn tests_cosine() {
         angle_cos_result, angle_cos_calculator
     );
     println!("------------------------------------------------------");
-    let mut u = Vector::from(vec![4., 6.]);
-    let mut v = Vector::from(vec![3., -7.]);
+    let u = Vector::from(vec![4., 6.]);
+    let v = Vector::from(vec![3., -7.]);
     println!("test with\n{}\n{}", u, v);
     println!("{}", angle_cos(&u, &v));
     assert_eq!(angle_cos(&u, &v), -0.54626775);
