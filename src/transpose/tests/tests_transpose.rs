@@ -54,4 +54,12 @@ pub fn tests_transpose() {
     println!("result {}", u.transpose());
     assert_eq!(u.transpose().elements, vec![vec![1., 0.], vec![0., 1.]]);
     println!("------------------------------------------------------");
+    let mut u = Matrix::from(vec![vec![1., 2.], vec![3., 4.], vec![5., 6.]]);
+    println!("test with :{}", u);
+    println!("result {}", u.transpose());
+    assert_eq!(
+        u.transpose().elements,
+        vec![vec![1., 3., 5.], vec![2., 4., 6.]]
+    );
+    println!("------------------------------------------------------");
 }
