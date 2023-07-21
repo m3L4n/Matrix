@@ -4,7 +4,10 @@ An introduction to Linear Algebra in rust
 Exercise 00 - Add, Subtract and Scale
 
 Maximum time complexity : O(n)
+
 Maximum space complexity : O(n)
+
+
 This project provides three functions that perform basic mathematical operations on vectors:
 
     add(vector1, vector2): This function computes the addition of two vectors. Both vectors must be of the same size for the operation to be valid. Otherwise, the result will be undefined.
