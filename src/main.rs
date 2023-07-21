@@ -28,10 +28,12 @@ mod types {
 }
 mod norm {
     pub mod norm;
-    pub mod norm_k;
     pub mod tests {
         pub mod tests_norme;
     }
+}
+mod norm_k {
+    pub mod norm_k;
 }
 mod cosine {
     pub mod cosine;
