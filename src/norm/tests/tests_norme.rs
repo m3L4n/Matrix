@@ -37,7 +37,7 @@ pub fn tests_norme_ec() {
     let mut u = Vector::new(vec![1., 2., 3.]);
     println!("test with:\n{:?}", u.values);
     println!("{}", u.norm());
-    assert_eq!(u.norm(), 3.74165738 as f32);
+    assert_eq!(u.norm(), 3.7416573);
     println!("------------------------------------------------------");
     let mut u = Vector::new(vec![-1., -2.]);
     println!("test with:\n{:?}", u.values);

@@ -39,7 +39,7 @@ where
                     new_matrix.elements[k].push(self.elements[i][u]);
                 }
             }
-            k = k + 1;
+            k += 1;
         }
         new_matrix
     }

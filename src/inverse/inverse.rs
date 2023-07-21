@@ -174,23 +174,23 @@ use std::vec;
 //     }
 // }
 pub fn division_vec(vec: Vec<f32>, scl: f32) -> Vec<f32> {
-    let mut vec_to_send: Vec<f32> = vec.clone();
+    let mut vec_to_send: Vec<f32> = vec;
     for row in vec_to_send.iter_mut() {
-        *row = row.clone() / scl;
+        *row /= scl;
     }
     vec_to_send
 }
 pub fn multiply_vec(vec: Vec<f32>, scl: f32) -> Vec<f32> {
     let mut vec_to_send: Vec<f32> = vec;
     for row in vec_to_send.iter_mut() {
-        *row = row.clone() * scl;
+        *row *= scl;
     }
     vec_to_send
 }
 pub fn sub_vec(vec: Vec<f32>, vec1: Vec<f32>) -> Vec<f32> {
-    let mut new_vector = vec.clone();
+    let mut new_vector = vec;
     for (elem1, elem2) in new_vector.iter_mut().zip(vec1.iter()) {
-        *elem1 = elem1.clone() - elem2.clone();
+        *elem1 -= *elem2;
     }
     new_vector
 }
@@ -240,8 +240,7 @@ impl Matrix<f32> {
         let truncated_number = format!("{:.6}", max.0);
         let test: f32 = truncated_number.parse().unwrap();
         if test == 0.0 {
-            let un: usize = 1;
-            *index_column = index_column.clone() + un;
+            *index_column += 1;
             if *index_column < self.elements[*pivot].len() {
                 self.found_pivot_and_transform_column_max_n(
                     pivot,
@@ -284,7 +283,7 @@ impl Matrix<f32> {
                 index,
                 new_matrix.size().0,
             );
-            index_column = index_column + 1;
+            index_column += 1;
         }
 
         new_matrix

@@ -35,11 +35,17 @@ impl<
         vec
     }
     pub fn add(&mut self, v: &Vector<K>) {
+        if self.elements.len() != v.elements.len() {
+            panic!("you cant add these two vector because the size is not the same");
+        }
         for (elem1, elem2) in self.elements.iter_mut().zip(v.elements.iter()) {
             *elem1 = elem1.clone() + elem2.clone();
         }
     }
     pub fn sub(&mut self, v: &Vector<K>) {
+        if self.elements.len() != v.elements.len() {
+            panic!("you cant add these two vector because the size is not the same");
+        }
         for (elem1, elem2) in self.elements.iter_mut().zip(v.elements.iter()) {
             *elem1 = elem1.clone() - elem2.clone();
         }

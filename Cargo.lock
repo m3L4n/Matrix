@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "THE_MATRIX"
+name = "matrix"
 version = "0.1.0"

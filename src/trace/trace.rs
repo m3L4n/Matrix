@@ -16,7 +16,7 @@ where
         }
         let mut k_to_send: K = K::default();
         for i in 0..self.elements.len() {
-            k_to_send = k_to_send + self.elements[i][i].clone();
+            k_to_send = k_to_send + self.elements[i][i];
         }
         k_to_send
     }

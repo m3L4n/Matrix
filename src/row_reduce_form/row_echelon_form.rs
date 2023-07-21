@@ -1,24 +1,23 @@
 use crate::Matrix;
-use std::ops::{Add, Mul, Sub};
 
 pub fn division_vec(vec: Vec<f32>, scl: f32) -> Vec<f32> {
-    let mut vec_to_send: Vec<f32> = vec.clone();
+    let mut vec_to_send: Vec<f32> = vec;
     for row in vec_to_send.iter_mut() {
-        *row = row.clone() / scl;
+        *row /= scl;
     }
     vec_to_send
 }
 pub fn multiply_vec(vec: Vec<f32>, scl: f32) -> Vec<f32> {
-    let mut vec_to_send: Vec<f32> = vec.clone();
+    let mut vec_to_send: Vec<f32> = vec;
     for row in vec_to_send.iter_mut() {
-        *row = row.clone() * scl;
+        *row *= scl;
     }
     vec_to_send
 }
 pub fn sub_vec(vec: Vec<f32>, vec1: Vec<f32>) -> Vec<f32> {
-    let mut new_vector = vec.clone();
+    let mut new_vector = vec;
     for (elem1, elem2) in new_vector.iter_mut().zip(vec1.iter()) {
-        *elem1 = elem1.clone() - elem2.clone();
+        *elem1 -= *elem2;
     }
     new_vector
 }
@@ -51,7 +50,7 @@ impl Matrix<f32> {
 
         if test == zero {
             let un: usize = 1;
-            *index_column = index_column.clone() + un;
+            *index_column += un;
 
             if *index_column < self.elements[*pivot].len() {
                 self.found_pivot_and_transform_column(pivot, index_column, index_initial);
@@ -85,7 +84,7 @@ impl Matrix<f32> {
         let mut new_matrix = self.clone();
         for (index, _colum) in self.elements.iter_mut().enumerate() {
             new_matrix.found_pivot_and_transform_column(&mut pivot, &mut index_column, index);
-            index_column = index_column + 1;
+            index_column += 1;
         }
 
         // il faut qu il y ai un 1 en first position de la premiere colone
