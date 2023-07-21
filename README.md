@@ -3,6 +3,8 @@ An introduction to Linear Algebra in rust
 
 Exercise 00 - Add, Subtract and Scale
 
+
+
 Exercise 01 - Linear combination
 
 Exercise 02 - Linear interpolation

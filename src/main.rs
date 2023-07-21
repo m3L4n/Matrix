@@ -94,6 +94,7 @@ use crate::determinant::tests::tests_determinant::tests_determinant;
 use crate::dot::tests::tests_dot_product::tests_dot_product;
 use crate::inverse::tests::tests_inverse::tests_inverse;
 use crate::linear::tests::tests_lerp::tests_lerp;
+
 use crate::linear::tests::tests_linear_combination::tests_linear_combination;
 use crate::matrix_mul::tests::tests_matrix_mul::tests_linear_map;
 use crate::matrix_mul::tests::tests_matrix_mul::tests_matrix_mul;
@@ -188,11 +189,91 @@ fn main() {
 mod tests {
     use super::*;
     #[test]
-    fn tests_simple_operations_vec() {
-        test_vector_simple_operations_add()
+    fn tests_simple_operations_vec_add() {
+        test_vector_simple_operations_add();
     }
-    // #[test]
-    // fn tests_simple_operation_vec() {
-    //     test_simple_operation_vec();
-    // }
+    #[test]
+    fn tests_simple_operations_vec_sub() {
+        test_vector_simple_operations_sub();
+    }
+    #[test]
+    fn tests_simple_vector_scl() {
+        test_vector_simple_operations_scl()
+    }
+    #[test]
+    fn tests_simple_matrix_add() {
+        test_matrix_simple_operations_add();
+    }
+    #[test]
+    fn tests_simple_matrix_sub() {
+        test_matrix_simple_operations_sub();
+    }
+    #[test]
+    fn tests_simple_matrix_scl() {
+        test_matrix_simple_operations_scl();
+    }
+    #[test]
+    fn tests_simple_matrix_linear_combination() {
+        tests_linear_combination();
+    }
+    #[test]
+    fn tests_simple_matrix_lerp() {
+        tests_lerp();
+    }
+    #[test]
+    fn tests_simple_matrix_dot() {
+        tests_dot_product();
+    }
+    #[test]
+    fn tests_simple_matrix_norm_ec() {
+        tests_norme_ec();
+    }
+    #[test]
+    fn tests_simple_matrix_norm_mh() {
+        tests_norme_mh();
+    }
+    #[test]
+    fn tests_simple_matrix_norm_inf() {
+        tests_norme_inf();
+    }
+    #[test]
+    fn tests_simple_matrix_cosine() {
+        tests_cosine();
+    }
+    #[test]
+    fn tests_simple_matrix_cp() {
+        tests_cross_product();
+    }
+    #[test]
+    fn tests_simple_matrix_lm() {
+        tests_linear_map();
+    }
+    #[test]
+    fn tests_simple_matrix_mm() {
+        tests_matrix_mul();
+    }
+    #[test]
+    fn tests_simple_matrix_trace() {
+        tests_trace();
+    }
+    #[test]
+    fn tests_simple_matrix_transpose() {
+        tests_transpose();
+    }
+    #[test]
+    fn tests_simple_matrix_echelon() {
+        tests_row_echelon_form();
+    }
+    #[test]
+    fn tests_simple_matrix_determinant() {
+        tests_determinant();
+    }
+    #[test]
+    fn tests_simple_matrix_inverse() {
+        tests_inverse();
+    }
+    #[test]
+    fn tests_simple_matrix_rank() {
+        tests_rank();
+    }
 }

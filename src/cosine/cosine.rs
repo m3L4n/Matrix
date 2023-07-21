@@ -30,8 +30,8 @@ where
     let mut vec_v = Vector {
         elements: v.elements.clone(),
     };
-    let norm_u: f32 = vec_u.norm();
-    let norm_v: f32 = vec_v.norm();
+    let norm_u: f32 = vec_u.norm_k();
+    let norm_v: f32 = vec_v.norm_k();
     let dot_u_v = vec_u.dot(vec_v);
     let dot_norm_u_v = get_dot_f32(norm_u, norm_v); //32.832910318764
     let angle_cos = dot_u_v / dot_norm_u_v;

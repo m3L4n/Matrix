@@ -27,7 +27,7 @@ impl<K> Vector<K>
 where
     K: Clone + Mul<K, Output = K> + Add<f32> + Into<f32> + std::fmt::Display,
 {
-    pub fn norm(&mut self) -> f32 {
+    pub fn norm_k(&mut self) -> f32 {
         let mut result_euclidean: f32 = 0.0;
         // if self.elements.len() < 0 {
         //     panic!(" the len is equal to 0");

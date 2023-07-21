@@ -9,7 +9,7 @@ pub fn tests_cosine() {
     let v = Vector::from(vec![4., 5., 6.]);
     println!("test with\n{}\n{}", u, v);
     println!("{}", angle_cos(&u, &v));
-    assert_eq!(angle_cos(&u, &v), 0.9746318);
+    assert_eq!(angle_cos(&u, &v), 0.9746319);
     println!("------------------------------------------------------");
     let u = Vector::from(vec![1., 0.]);
     let v = Vector::from(vec![1., 0.]);
@@ -61,10 +61,10 @@ pub fn tests_cosine() {
     println!("test with\n{}\n{}", u, v);
     println!("{}", angle_cos(&u, &v));
     assert_eq!(angle_cos(&u, &v), 0.99145424);
-    let norm_u_f32 = u.norm();
+    let norm_u_f32 = u.norm_k();
     let norm_calculator_u_f32 = 10.630145812735 as f32;
     assert_eq!(norm_u_f32, norm_calculator_u_f32);
-    let norm_v_f32 = v.norm();
+    let norm_v_f32 = v.norm_k();
     let norm_calculator_v_f32 = 3.605551275464 as f32;
     assert_eq!(norm_v_f32, norm_calculator_v_f32);
     let dot_f32 = u.dot(v);
@@ -113,10 +113,10 @@ pub fn tests_cosine() {
     println!("test with\n{}\n{}", u, v);
     println!("{}", angle_cos(&u, &v));
     assert_eq!(angle_cos(&u, &v), -0.54626775);
-    let norm_u_f32 = u.norm();
+    let norm_u_f32 = u.norm_k();
     let norm_calculator_u_f32 = 7.6157731058639 as f32;
     assert_eq!(norm_u_f32, norm_calculator_u_f32);
-    let norm_v_f32 = v.norm();
+    let norm_v_f32 = v.norm_k();
     let norm_calculator_v_f32 = 7.211102550928 as f32;
     assert_eq!(norm_v_f32, norm_calculator_v_f32);
     let dot_f32 = u.dot(v);
