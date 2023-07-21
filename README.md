@@ -1,6 +1,6 @@
 # Matrix
 An introduction to Linear Algebra in rust
-
+Introduction
 Exercise 00 - Add, Subtract and Scale
 
 Maximum time complexity : O(n)
