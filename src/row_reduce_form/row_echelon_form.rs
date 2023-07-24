@@ -1,5 +1,4 @@
 use crate::Matrix;
-
 pub fn division_vec(vec: Vec<f32>, scl: f32) -> Vec<f32> {
     let mut vec_to_send: Vec<f32> = vec;
     for row in vec_to_send.iter_mut() {
@@ -44,11 +43,10 @@ impl Matrix<f32> {
                 max.2 = self.elements[i].clone(); // var  a changer de place
             }
         }
-        let zero: f32 = 0.0;
         let truncated_number = format!("{:.6}", max.0);
         let test: f32 = truncated_number.parse().unwrap();
 
-        if test == zero {
+        if test == 0.0 {
             let un: usize = 1;
             *index_column += un;
 
@@ -57,19 +55,18 @@ impl Matrix<f32> {
             }
             return;
         }
-        if max.0 != zero {
+        if max.0 != 0.0 {
             max.2 = division_vec(max.2, max.0);
             if max.1 != *pivot {
                 self.elements[max.1] = self.elements[*index_column].clone();
             }
-            let pivot_tmp = *pivot;
             self.elements[index_initial] = max.2.clone();
             let tmp = self.clone();
-            *pivot = pivot_tmp + 1;
+            *pivot += 1;
             for i in 0..tmp.elements.len() {
                 if i != (*pivot - 1) {
                     // println!("self {} ", self);
-                    if self.elements[i][*index_column] != zero {
+                    if self.elements[i][*index_column] != 0.0 {
                         let res_mult = multiply_vec(max.2.clone(), self.elements[i][*index_column]);
                         let result_sub = sub_vec(tmp.elements[i].clone(), res_mult);
                         self.elements[i] = result_sub;
@@ -86,11 +83,6 @@ impl Matrix<f32> {
             new_matrix.found_pivot_and_transform_column(&mut pivot, &mut index_column, index);
             index_column += 1;
         }
-
-        // il faut qu il y ai un 1 en first position de la premiere colone
-        // -> sois c un non null o debut et c ok
-        //sois tu vas echanger avec une ligne si ya un en first ou
-
         new_matrix
     }
 }

@@ -11,6 +11,9 @@ where
         + Default,
 {
     pub fn transpose(&mut self) -> Matrix<K> {
+        if self.elements.len() <= 0 {
+            panic!("error param");
+        }
         self.get_matrix_colum()
     }
 }

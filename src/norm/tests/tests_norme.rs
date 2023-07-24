@@ -42,6 +42,11 @@ pub fn tests_norme_ec() {
     println!("test with:\n{:?}", u.values);
     println!("{}", u.norm());
     assert_eq!(u.norm(), 2.236067977 as f32);
+    println!("------------------------------------------------------");
+    let mut u = Vector::new(vec![-2., -6., 5.]);
+    println!("test with:\n{:?}", u.values);
+    println!("{}", u.norm());
+    assert_eq!(u.norm(), 8.0622577482985 as f32);
     // // 0.0, 0.0, 0.0
     // let mut u = Vector::from(vec![1., 2., 3.]);
     // println!("{}, {}, {}", u.norm_1(), u.norm(), u.norm_inf());
@@ -99,6 +104,10 @@ pub fn tests_norme_mh() {
     println!("test with:\n{:?}", u.values);
     println!("{}", u.norm_1());
     assert_eq!(u.norm_1(), 3.0);
+    let mut u = Vector::new(vec![-2., -6., 5.]);
+    println!("test with:\n{:?}", u.values);
+    println!("{}", u.norm_1());
+    assert_eq!(u.norm_1(), 13.);
 }
 
 pub fn tests_norme_inf() {

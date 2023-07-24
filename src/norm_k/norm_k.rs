@@ -27,7 +27,7 @@ impl<K> Vector<K>
 where
     K: Clone + Mul<K, Output = K> + Add<f32> + Into<f32> + std::fmt::Display,
 {
-    pub fn norm_k(&mut self) -> f32 {
+    pub fn norm_k(&self) -> f32 {
         let mut result_euclidean: f32 = 0.0;
         for element in &self.elements {
             let squared = (element.clone()).into() * (element.clone()).into();

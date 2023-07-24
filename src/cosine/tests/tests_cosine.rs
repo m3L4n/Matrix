@@ -56,8 +56,8 @@ pub fn tests_cosine() {
     println!("{}", angle_cos(&u, &v));
     assert_eq!(angle_cos(&u, &v), 0.8);
     println!("------------------------------------------------------");
-    let mut u = Vector::from(vec![8., 7.]);
-    let mut v = Vector::from(vec![3., 2.]);
+    let u = Vector::from(vec![8., 7.]);
+    let v = Vector::from(vec![3., 2.]);
     println!("test with\n{}\n{}", u, v);
     println!("{}", angle_cos(&u, &v));
     assert_eq!(angle_cos(&u, &v), 0.99145424);
@@ -108,8 +108,8 @@ pub fn tests_cosine() {
     println!("{}", angle_cos(&u, &v));
     assert_eq!(angle_cos(&u, &v), 0.94868326);
     println!("------------------------------------------------------");
-    let mut u = Vector::from(vec![-7., 3.]);
-    let mut v = Vector::from(vec![6., 4.]);
+    let u = Vector::from(vec![-7., 3.]);
+    let v = Vector::from(vec![6., 4.]);
     println!("test with\n{}\n{}", u, v);
     println!("{}", angle_cos(&u, &v));
     assert_eq!(angle_cos(&u, &v), -0.54626775);

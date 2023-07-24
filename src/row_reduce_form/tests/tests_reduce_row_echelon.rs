@@ -103,4 +103,16 @@ pub fn tests_row_echelon_form() {
     assert_eq!(result.elements[0], Vec::from(vec![1., 0., 0.]));
     assert_eq!(result.elements[1], Vec::from(vec![0., 1., 0.]));
     assert_eq!(result.elements[2], Vec::from(vec![0., 0., 1.]));
+    println!("------------------------------------------------------");
+    let mut u = Matrix::from(vec![
+        vec![1., -1., 2.],
+        vec![3., 2., 1.],
+        vec![2., -3., -2.],
+    ]);
+    println!(" U : {}", u);
+    let result = u.row_echelon();
+    println!("result: {}", result);
+    assert_eq!(result.elements[0], Vec::from([1., 0., 0.]));
+    assert_eq!(result.elements[1], Vec::from([0., 1., 0.]));
+    assert_eq!(result.elements[2], Vec::from([0., 0., 1.]));
 }

@@ -26,6 +26,7 @@ This project provides three functions that perform basic mathematical operations
 
 Exercise 01 - Linear combination
 
+
 Exercise 02 - Linear interpolation
 
 Exercise 03 - Dot product

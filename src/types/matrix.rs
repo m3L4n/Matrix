@@ -31,7 +31,6 @@ impl<
 {
     pub fn from(data: Vec<Vec<K>>) -> Matrix<K> {
         let vec = Matrix {
-            // permet de demander au compilateur de savoir le type concret
             elements: Vec::from(data),
         };
         vec

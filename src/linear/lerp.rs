@@ -7,8 +7,5 @@ pub fn lerp<
     v: V,
     t: f32,
 ) -> V {
-    let mut ue = v.clone() - u.clone();
-    ue = ue * t;
-    ue = ue + u;
-    ue
+    u * (1. - t) + v * t
 }

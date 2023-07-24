@@ -72,6 +72,10 @@ pub fn tests_determinant() {
     println!(" U : {}", u);
     println!("result :{:?}", u.determinant());
     assert_eq!(u.determinant(), 1.0);
+    let mut u = Matrix::from(vec![vec![1.]]);
+    println!(" U : {}", u);
+    println!("result :{:?}", u.determinant());
+    assert_eq!(u.determinant(), 1.0);
     println!("------------------------------------------------------");
     let mut u = Matrix::from(vec![vec![1., 4., 2.], vec![1., 4., 2.], vec![3., 9., 5.]]);
     println!(" U : {}", u);
@@ -79,10 +83,14 @@ pub fn tests_determinant() {
     assert_eq!(u.determinant(), 0.0);
     println!("------------------------------------------------------");
     let mut u = Matrix::from(vec![vec![1, 4, 2], vec![0, 0, 0], vec![3, 9, 5]]);
+    println!(" U : {}", u);
+    println!("result :{:?}", u.determinant());
     assert_eq!(u.determinant(), 0);
     println!("------------------------------------------------------");
 
     let mut u = Matrix::from(vec![vec![1, 4, 2], vec![3, 9, 5], vec![3, 9, 5]]);
+    println!(" U : {}", u);
+    println!("result :{:?}", u.determinant());
     assert_eq!(u.determinant(), 0);
     println!("------------------------------------------------------");
 }
