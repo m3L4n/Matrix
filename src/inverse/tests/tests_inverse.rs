@@ -169,15 +169,15 @@ pub fn tests_inverse() {
         println!("Error: {}", err);
     }
     println!("------------------------------------------------------");
-    // match result {
-    //     Ok(r) => {
-    //         println!("result {}", r);
+    match result {
+        Ok(r) => {
+            println!("result {}", r);
 
-    //         assert_eq!(r.elements[0], vec![0.6, -0.7]);
-    //         assert_eq!(r.elements[1], vec![-0.2, 0.4]);
-    //     }
-    //     Err(_) => {
-    //         assert_eq!(0, 1);
-    //     }
-    // }
+            assert_eq!(r.elements[0], vec![0.6, -0.7]);
+            assert_eq!(r.elements[1], vec![-0.2, 0.4]);
+        }
+        Err(_) => {
+            assert_eq!(0, 1);
+        }
+    }
 }

@@ -21,15 +21,14 @@ where
             panic!("the len is size 0 ")
         }
         let mut vector_to_send = Vector {
-            elements: vec.elements.clone(),
+            elements: Vec::with_capacity(self.elements.len()),
         };
-
-        for (index, row) in self.elements.iter().enumerate() {
+        for (_index, row) in self.elements.iter().enumerate() {
             let mut res = K::default();
             for i in 0..row.len() {
                 res = res + (row[i] * vec.elements[i]);
             }
-            vector_to_send.elements[index] = res;
+            vector_to_send.elements.push(res);
         }
         vector_to_send
     }

@@ -97,4 +97,8 @@ pub fn tests_linear_combination() {
     let v2 = Vector::from(vec![4., 8.]);
     let linear_combined = linear_combination::<f32>(&[v1, v2], &[4., 2.]);
     assert_eq!(linear_combined.elements, vec![16., 28.]);
+    let v1 = Vector::from(vec![0., 2.]);
+    let v2 = Vector::from(vec![-4., 2.]);
+    let linear_combined = linear_combination::<f32>(&[v1, v2], &[-1., 2.]);
+    assert_eq!(linear_combined.elements, vec![-8., 2.]);
 }

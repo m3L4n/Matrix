@@ -1,26 +1,6 @@
+use crate::inverse::inverse::multiply_vec;
+use crate::inverse::inverse::sub_vec;
 use crate::Matrix;
-
-pub fn division_vec(vec: Vec<f32>, scl: f32) -> Vec<f32> {
-    let mut vec_to_send: Vec<f32> = vec;
-    for row in vec_to_send.iter_mut() {
-        *row /= scl;
-    }
-    vec_to_send
-}
-pub fn multiply_vec(vec: Vec<f32>, scl: f32) -> Vec<f32> {
-    let mut vec_to_send: Vec<f32> = vec;
-    for row in vec_to_send.iter_mut() {
-        *row *= scl;
-    }
-    vec_to_send
-}
-pub fn sub_vec(vec: Vec<f32>, vec1: Vec<f32>) -> Vec<f32> {
-    let mut new_vector = vec;
-    for (elem1, elem2) in new_vector.iter_mut().zip(vec1.iter()) {
-        *elem1 -= *elem2;
-    }
-    new_vector
-}
 
 impl Matrix<f32> {
     fn found_pivot_and_transform_column_not_reduced(
@@ -67,20 +47,18 @@ impl Matrix<f32> {
             return;
         }
         if max.0 != zero_k {
-            max.2 = division_vec(max.2, max.0);
+            Self::division_vec(&mut max.2, max.0);
             if max.1 != *pivot {
                 self.elements[max.1] = self.elements[*index_column].clone();
             }
-            let pivot_tmp = *pivot;
             self.elements[index_initial] = max.2.clone();
-            let self_tmp = self.clone();
-            *pivot = pivot_tmp + 1;
-            for i in 0..self_tmp.elements.len() {
+            *pivot += 1;
+            for (i, colum) in self.elements.iter_mut().enumerate() {
                 if i != (*pivot - 1) {
-                    if self.elements[i][*index_column] != zero_k {
-                        let res_mult = multiply_vec(max.2.clone(), self.elements[i][*index_column]);
-                        let result_sub = sub_vec(self_tmp.elements[i].clone(), res_mult);
-                        self.elements[i] = result_sub;
+                    if colum[*index_column] != 0.0 {
+                        let res_mult = multiply_vec(&max.2, colum[*index_column]);
+                        let result_sub = sub_vec(colum.clone(), res_mult);
+                        *colum = result_sub;
                     }
                 }
             }

@@ -32,7 +32,10 @@ where
     let norm_v: f32 = v.norm_k();
     let dot_u_v = u.dot(vec_v);
     let dot_norm_u_v = get_dot_f32(norm_u, norm_v);
-    let angle_cos = dot_u_v / dot_norm_u_v;
+    let mut angle_cos = 0.0;
+    if dot_norm_u_v != 0.0 {
+        angle_cos = dot_u_v / dot_norm_u_v;
+    }
     angle_cos
     // norm (u ) norm (v)
     // dot (u, v)

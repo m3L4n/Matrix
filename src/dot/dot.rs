@@ -13,11 +13,9 @@ where
             panic!("can't do operation");
         }
         let mut result_dot_operations: K = K::default();
-        for i in 0..self.elements.len() {
-            result_dot_operations =
-                result_dot_operations + self.elements[i].clone() * v.elements[i].clone()
+        for (elem1, elem2) in self.elements.iter().zip(v.elements.iter()) {
+            result_dot_operations = result_dot_operations + (elem1.clone() * elem2.clone());
         }
-
         result_dot_operations
     }
 }

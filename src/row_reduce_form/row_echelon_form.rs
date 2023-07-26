@@ -6,8 +6,8 @@ pub fn division_vec(vec: Vec<f32>, scl: f32) -> Vec<f32> {
     }
     vec_to_send
 }
-pub fn multiply_vec(vec: Vec<f32>, scl: f32) -> Vec<f32> {
-    let mut vec_to_send: Vec<f32> = vec;
+pub fn multiply_vec(vec: &Vec<f32>, scl: f32) -> Vec<f32> {
+    let mut vec_to_send: Vec<f32> = vec.clone();
     for row in vec_to_send.iter_mut() {
         *row *= scl;
     }
@@ -61,15 +61,14 @@ impl Matrix<f32> {
                 self.elements[max.1] = self.elements[*index_column].clone();
             }
             self.elements[index_initial] = max.2.clone();
-            let tmp = self.clone();
             *pivot += 1;
-            for i in 0..tmp.elements.len() {
+
+            for (i, colum) in self.elements.iter_mut().enumerate() {
                 if i != (*pivot - 1) {
-                    // println!("self {} ", self);
-                    if self.elements[i][*index_column] != 0.0 {
-                        let res_mult = multiply_vec(max.2.clone(), self.elements[i][*index_column]);
-                        let result_sub = sub_vec(tmp.elements[i].clone(), res_mult);
-                        self.elements[i] = result_sub;
+                    if colum[*index_column] != 0.0 {
+                        let res_mult = multiply_vec(&max.2, colum[*index_column]);
+                        let result_sub = sub_vec(colum.clone(), res_mult);
+                        *colum = result_sub;
                     }
                 }
             }
@@ -79,6 +78,7 @@ impl Matrix<f32> {
         let mut pivot: usize = 0;
         let mut index_column: usize = 0;
         let mut new_matrix = self.clone();
+
         for (index, _colum) in self.elements.iter_mut().enumerate() {
             new_matrix.found_pivot_and_transform_column(&mut pivot, &mut index_column, index);
             index_column += 1;

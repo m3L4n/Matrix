@@ -60,6 +60,12 @@ pub fn tests_linear_map() {
     println!("resultat : {}", u.mul_vec(v.clone()));
     assert_eq!(u.mul_vec(v).elements, vec![2., 1.]);
     println!("------------------------------------------------------");
+    let mut u = Matrix::from(vec![vec![0.5], vec![0.]]);
+    let v = Vector::from(vec![4.]);
+    println!("test with\n{}\n{}", u, v);
+    println!("resultat : {}", u.mul_vec(v.clone()));
+    // assert_eq!(u.mul_vec(v).elements, vec![2., 1.]);
+    println!("------------------------------------------------------");
     // // [-4.]
 }
 pub fn tests_matrix_mul() {
